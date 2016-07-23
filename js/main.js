@@ -24,3 +24,16 @@ function getTotal(list){
 
 /* testando a nossa função getTotal*/
 console.log(getTotal(list));
+
+/*  */
+function setList(list){
+	var table = '<thead> <tr> <td>Description</td> <td>Amount</td> <td>Value</td> <td>Action</td> </tr> </thead><tbody>';
+	for (var key in list) {
+		table += '<tr> <td>'+ list[key].desc+'</td> <td>'+ list[key].amount+'</td> <td>$ '+ list[key].value+'</td> <td>Edit | Delete</td> </tr>';
+	}
+	table += '</tbody>';
+	document.getElementById("listTable").innerHTML = table;
+}
+
+/* Usando a funcao setList() */
+setList(list);
