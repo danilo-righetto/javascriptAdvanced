@@ -35,8 +35,7 @@ function setList(list){
 	document.getElementById("listTable").innerHTML = table;
 }
 
-/* Usando a funcao setList() */
-setList(list);
+
 
 /* Formatando a Descrição */
 
@@ -63,3 +62,18 @@ function formatValue(value){
 
 	return str; 
 }
+
+/* adicionando novo registro */
+function addData(){
+	var desc = document.getElementById("desc").value;
+	var amount = document.getElementById("amount").value;
+	var value = document.getElementById("value").value;
+
+	// Adicionando um novo objeto pro começo da lista
+	list.unshift({"desc": desc, "amount":amount, "value":value});
+
+	setList(list);
+}
+
+/* Usando a funcao setList() */
+setList(list);
