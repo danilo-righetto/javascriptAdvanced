@@ -23,7 +23,7 @@ function getTotal(list){
 }
 
 /* testando a nossa função getTotal*/
-console.log(getTotal(list));
+//console.log(getTotal(list));
 
 /*  */
 function setList(list){
@@ -34,6 +34,7 @@ function setList(list){
 	table += '</tbody>';
 	document.getElementById("listTable").innerHTML = table;
 	getTotal(list);
+	saveListStorage(list);
 	
 }
 
@@ -185,5 +186,19 @@ function deleteList(){
 	}
 }
 
+function saveListStorage(list){
+	var jsonStr = JSON.stringify(list);
+	localStorage.setItem("list",jsonStr);
+	//console.log(jsonStr);
+}
+
+function initListStorage(){
+	var testeList = localStorage.getItem("list");
+	if(testeList){
+		list = JSON.parse(testeList);
+	}
+	setList(list);
+}
+
 /* Usando a funcao setList() */
-setList(list);
+initListStorage();
