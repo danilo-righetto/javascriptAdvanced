@@ -29,7 +29,7 @@ console.log(getTotal(list));
 function setList(list){
 	var table = '<thead> <tr> <td>Description</td> <td>Amount</td> <td>Value</td> <td>Action</td> </tr> </thead><tbody>';
 	for (var key in list) {
-		table += '<tr> <td>'+ formatDesc(list[key].desc)+'</td> <td>'+ list[key].amount+'</td> <td>'+ formatValue(list[key].value)+'</td> <td><button class="btn btn-default" onclick="setUpdate('+key+');">Edit</button>  | Delete</td> </tr>';
+		table += '<tr> <td>'+ formatDesc(list[key].desc)+'</td> <td>'+ list[key].amount+'</td> <td>'+ formatValue(list[key].value)+'</td> <td><button class="btn btn-default" onclick="setUpdate('+key+');">Edit</button> <button class="btn btn-default" onclick="deleteData('+key+');">Delete</button></td> </tr>';
 	}
 	table += '</tbody>';
 	document.getElementById("listTable").innerHTML = table;
@@ -114,5 +114,22 @@ function updateData(){
 	
 }
 
+
+function deleteData(id){
+	if(confirm("Deletar esse item?")){
+		if(id === list.length - 1){
+			list.pop();
+		}else if(id === 0){
+			list.shift();
+		}else{
+			var arrayAuxIni = list.slice(0, id);
+			var arrayAuxEnd = list.slice(id + 1);
+			list = arrayAuxIni.concat(arrayAuxEnd);
+		}
+		setList(list);
+	}else{
+
+	}
+}
 /* Usando a funcao setList() */
 setList(list);
