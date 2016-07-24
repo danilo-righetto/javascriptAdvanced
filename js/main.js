@@ -29,7 +29,7 @@ console.log(getTotal(list));
 function setList(list){
 	var table = '<thead> <tr> <td>Description</td> <td>Amount</td> <td>Value</td> <td>Action</td> </tr> </thead><tbody>';
 	for (var key in list) {
-		table += '<tr> <td>'+ formatDesc(list[key].desc)+'</td> <td>'+ list[key].amount+'</td> <td>'+ formatValue(list[key].value)+'</td> <td><button class="btn btn-default" onclick="setUpdate('+key+');">Edit</button> <button class="btn btn-default" onclick="deleteData('+key+');">Delete</button></td> </tr>';
+		table += '<tr> <td>'+ formatDesc(list[key].desc)+'</td> <td>'+ formatAmount(list[key].amount)+'</td> <td>'+ formatValue(list[key].value)+'</td> <td><button class="btn btn-default" onclick="setUpdate('+key+');">Edit</button> <button class="btn btn-default" onclick="deleteData('+key+');">Delete</button></td> </tr>';
 	}
 	table += '</tbody>';
 	document.getElementById("listTable").innerHTML = table;
@@ -64,8 +64,16 @@ function formatValue(value){
 	return str; 
 }
 
+/* Formatando a Quantidade */
+function formatAmount(amount){
+	return parseInt(amount); 
+}
+
 /* adicionando novo registro */
 function addData(){
+	if(!validation()){
+		return;
+	}
 	var desc = document.getElementById("desc").value;
 	var amount = document.getElementById("amount").value;
 	var value = document.getElementById("value").value;
@@ -97,12 +105,16 @@ function resetForm(){
 	document.getElementById("btnUpdate").style.display = "none";
 	document.getElementById("inputIdUpdate").innerHTML = "";
 	//document.getElementById("idUpdate").value = "";
+	document.getElementById("errors").innerHTML = "";
 	document.getElementById("btnAdd").style.display = "inline-block";
 	//setList();
 
 }
 
 function updateData(){
+	if(!validation()){
+		return;
+	}
 	var id = document.getElementById("idUpdate").value;
 	var desc = document.getElementById("desc").value;
 	var amount = document.getElementById("amount").value;
@@ -131,5 +143,39 @@ function deleteData(id){
 
 	}
 }
+
+function validation(){
+	var desc = document.getElementById("desc").value;
+	var amount= document.getElementById("amount").value;
+	var value = document.getElementById("value").value;
+	var errors = "";
+
+	if(desc === ""){
+		errors += '<p>Digite uma descrição!</p>';
+	}
+
+	if(amount === null){
+		errors += '<p>Digite uma quantidade!</p>';	
+	}else if(amount  != parseInt(amount)){
+		errors += '<p>Digite uma valor numerico!</p>';
+	}
+
+
+	if(value === null){
+		errors += '<p>Digite uma quantidade!</p>';	
+	}else if(value  != parseFloat(value)){
+		errors += '<p>Digite uma valor correto!</p>';
+	}
+
+	if(errors != ""){
+		document.getElementById("errors").innerHTML = "<h3>Error: </h3>" + errors;
+		return 0;
+	}else{
+		document.getElementById("errors").innerHTML = "";
+		return 1;
+	}
+
+}
+
 /* Usando a funcao setList() */
 setList(list);
