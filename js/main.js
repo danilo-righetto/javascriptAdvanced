@@ -16,10 +16,10 @@ var list = [
 /* valor total da nosso compra */
 function getTotal(list){
 	var total = 0;
-	for (var key in list) {
+	for(var key in list){
 		total += list[key].value * list[key].amount;
+		document.getElementById("totalValue").innerHTML = formatValue(total);
 	}
-	return total;
 }
 
 /* testando a nossa função getTotal*/
@@ -33,6 +33,7 @@ function setList(list){
 	}
 	table += '</tbody>';
 	document.getElementById("listTable").innerHTML = table;
+	getTotal(list);
 	
 }
 
