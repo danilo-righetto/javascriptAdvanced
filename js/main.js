@@ -178,5 +178,12 @@ function validation(){
 
 }
 
+function deleteList(){
+	if(confirm("Deletar essa lista?")){
+		list = [];
+		setList(list);
+	}
+}
+
 /* Usando a funcao setList() */
 setList(list);
